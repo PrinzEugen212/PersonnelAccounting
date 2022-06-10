@@ -45,41 +45,48 @@ namespace PersAccounting.Forms.ModelManage.DirectorForms
 
         private void bConfirm_Click(object sender, EventArgs e)
         {
-            if (formMode == ManageFormMode.Add)
+            try
             {
-                using (DataBase db = new DataBase())
+                if (formMode == ManageFormMode.Add)
                 {
-                    Director director = new Director()
+                    using (DataBase db = new DataBase())
                     {
-                        Name = tbName.Text,
-                        Surname = tbSurname.Text,
-                        Patronymic = tbPatronymic.Text,
-                        BirthDate = dtpBirthDate.Value,
-                        Gender = cmbGender.SelectedItem.ToString(),
-                        Post = tbPost.Text
-                    };
+                        Director director = new Director()
+                        {
+                            Name = tbName.Text,
+                            Surname = tbSurname.Text,
+                            Patronymic = tbPatronymic.Text,
+                            BirthDate = dtpBirthDate.Value,
+                            Gender = cmbGender.SelectedItem.ToString(),
+                            Post = tbPost.Text
+                        };
 
-                    db.AddModel<Director>(director);
+                        db.AddModel<Director>(director);
+                    }
+
+                    parent.RefreshOwner();
+                    parent.Close();
                 }
-
-                parent.RefreshOwner();
-                parent.Close();
-            }
-            else
-            {
-                using (DataBase db = new DataBase())
+                else
                 {
-                    director.Name = tbName.Text;
-                    director.Surname = tbSurname.Text;
-                    director.Patronymic = tbPatronymic.Text;
-                    director.BirthDate = dtpBirthDate.Value;
-                    director.Gender = cmbGender.SelectedItem.ToString();
-                    director.Post = tbPost.Text;
-                    db.EditModel<Director>(director);
-                }
+                    using (DataBase db = new DataBase())
+                    {
+                        director.Name = tbName.Text;
+                        director.Surname = tbSurname.Text;
+                        director.Patronymic = tbPatronymic.Text;
+                        director.BirthDate = dtpBirthDate.Value;
+                        director.Gender = cmbGender.SelectedItem.ToString();
+                        director.Post = tbPost.Text;
+                        db.EditModel<Director>(director);
+                    }
 
-                DialogResult = DialogResult.OK;
-                Close();
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Произошла ошибка. Попробуйте заполнить все поля формы");
             }
         }
     }

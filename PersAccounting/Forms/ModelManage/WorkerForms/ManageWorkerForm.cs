@@ -64,49 +64,56 @@ namespace PersAccounting.Forms.ModelManage.WorkerForms
 
         private void bConfirm_Click(object sender, EventArgs e)
         {
-            if (formMode == ManageFormMode.Add)
+            try
             {
-                Worker worker = new Worker()
+                if (formMode == ManageFormMode.Add)
                 {
-                    Name = tbName.Text,
-                    Surname = tbSurname.Text,
-                    Patronymic = tbPatronymic.Text,
-                    BirthDate = dtpBirthDate.Value,
-                    Gender = cmbGender.SelectedItem.ToString()
-                };
+                    Worker worker = new Worker()
+                    {
+                        Name = tbName.Text,
+                        Surname = tbSurname.Text,
+                        Patronymic = tbPatronymic.Text,
+                        BirthDate = dtpBirthDate.Value,
+                        Gender = cmbGender.SelectedItem.ToString()
+                    };
 
-                if (cmbHead.SelectedIndex >= 0)
-                {
-                    worker.HeadId = heads[cmbHead.SelectedIndex].Id;
-                }
-
-                using (DataBase db = new DataBase())
-                {
-                    db.AddModel(worker);
-                }
-
-                parent.RefreshOwner();
-                parent.Close();
-            }
-            else
-            {
-                using (DataBase db = new DataBase())
-                {
-                    worker.Name = tbName.Text;
-                    worker.Surname = tbSurname.Text;
-                    worker.Patronymic = tbPatronymic.Text;
-                    worker.BirthDate = dtpBirthDate.Value;
-                    worker.Gender = cmbGender.SelectedItem.ToString();
                     if (cmbHead.SelectedIndex >= 0)
                     {
-                        worker.Head = heads[cmbHead.SelectedIndex];
+                        worker.HeadId = heads[cmbHead.SelectedIndex].Id;
                     }
 
-                    db.EditModel<Worker>(worker);
-                }
+                    using (DataBase db = new DataBase())
+                    {
+                        db.AddModel(worker);
+                    }
 
-                DialogResult = DialogResult.OK;
-                Close();
+                    parent.RefreshOwner();
+                    parent.Close();
+                }
+                else
+                {
+                    using (DataBase db = new DataBase())
+                    {
+                        worker.Name = tbName.Text;
+                        worker.Surname = tbSurname.Text;
+                        worker.Patronymic = tbPatronymic.Text;
+                        worker.BirthDate = dtpBirthDate.Value;
+                        worker.Gender = cmbGender.SelectedItem.ToString();
+                        if (cmbHead.SelectedIndex >= 0)
+                        {
+                            worker.Head = heads[cmbHead.SelectedIndex];
+                        }
+
+                        db.EditModel<Worker>(worker);
+                    }
+
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Произошла ошибка. Попробуйте заполнить все поля формы");
             }
         }
     }

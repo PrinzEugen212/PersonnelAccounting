@@ -60,48 +60,57 @@ namespace PersAccounting.Forms.ModelManage.ControllerForms
 
         private void bConfirm_Click(object sender, EventArgs e)
         {
-            if (formMode == ManageFormMode.Add)
+            try
             {
-                using (DataBase db = new DataBase())
-                {
-                    Controller controller = new Controller()
-                    {
-                        Name = tbName.Text,
-                        Surname = tbSurname.Text,
-                        Patronymic = tbPatronymic.Text,
-                        BirthDate = dtpBirthDate.Value,
-                        Gender = cmbGender.SelectedItem.ToString()
-                    };
 
-                    if (cmbHead.SelectedIndex >= 0)
+
+                if (formMode == ManageFormMode.Add)
+                {
+                    using (DataBase db = new DataBase())
                     {
-                        controller.Head = heads[cmbHead.SelectedIndex];
+                        Controller controller = new Controller()
+                        {
+                            Name = tbName.Text,
+                            Surname = tbSurname.Text,
+                            Patronymic = tbPatronymic.Text,
+                            BirthDate = dtpBirthDate.Value,
+                            Gender = cmbGender.SelectedItem.ToString()
+                        };
+
+                        if (cmbHead.SelectedIndex >= 0)
+                        {
+                            controller.Head = heads[cmbHead.SelectedIndex];
+                        }
+
+                        db.AddModel<Controller>(controller);
                     }
 
-                    db.AddModel<Controller>(controller);
+                    parent.RefreshOwner();
+                    parent.Close();
                 }
+                else
+                {
+                    using (DataBase db = new DataBase())
+                    {
+                        controller.Name = tbName.Text;
+                        controller.Surname = tbSurname.Text;
+                        controller.Patronymic = tbPatronymic.Text;
+                        controller.BirthDate = dtpBirthDate.Value;
+                        controller.Gender = cmbGender.SelectedItem.ToString();
+                        if (cmbHead.SelectedIndex >= 0)
+                        {
+                            controller.HeadId = heads[cmbHead.SelectedIndex].Id;
+                        }
+                        db.EditModel<Controller>(controller);
+                    }
 
-                parent.RefreshOwner();
-                parent.Close();
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
             }
-            else
+            catch
             {
-                using (DataBase db = new DataBase())
-                {
-                    controller.Name = tbName.Text;
-                    controller.Surname = tbSurname.Text;
-                    controller.Patronymic = tbPatronymic.Text;
-                    controller.BirthDate = dtpBirthDate.Value;
-                    controller.Gender = cmbGender.SelectedItem.ToString();
-                    if (cmbHead.SelectedIndex >= 0)
-                    {
-                        controller.HeadId = heads[cmbHead.SelectedIndex].Id;
-                    }
-                    db.EditModel<Controller>(controller);
-                }
-
-                DialogResult = DialogResult.OK;
-                Close();
+                MessageBox.Show("Произошла ошибка. Попробуйте заполнить все поля формы");
             }
         }
     }

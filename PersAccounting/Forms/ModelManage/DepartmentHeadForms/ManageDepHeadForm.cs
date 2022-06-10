@@ -45,41 +45,48 @@ namespace PersAccounting.Forms.ModelManage.DepartmentHeadForms
 
         private void bConfirm_Click(object sender, EventArgs e)
         {
-            if (formMode == ManageFormMode.Add)
+            try
             {
-                using (DataBase db = new DataBase())
+                if (formMode == ManageFormMode.Add)
                 {
-                    DepartmentHead departmentHead = new DepartmentHead()
+                    using (DataBase db = new DataBase())
                     {
-                        Name = tbName.Text,
-                        Surname = tbSurname.Text,
-                        Patronymic = tbPatronymic.Text,
-                        BirthDate = dtpBirthDate.Value,
-                        Gender = cmbGender.SelectedItem.ToString(),
-                        Department = tbDepartment.Text
-                    };
+                        DepartmentHead departmentHead = new DepartmentHead()
+                        {
+                            Name = tbName.Text,
+                            Surname = tbSurname.Text,
+                            Patronymic = tbPatronymic.Text,
+                            BirthDate = dtpBirthDate.Value,
+                            Gender = cmbGender.SelectedItem.ToString(),
+                            Department = tbDepartment.Text
+                        };
 
-                    db.AddModel<DepartmentHead>(departmentHead);
+                        db.AddModel<DepartmentHead>(departmentHead);
+                    }
+
+                    parent.RefreshOwner();
+                    parent.Close();
                 }
-
-                parent.RefreshOwner();
-                parent.Close();
-            }
-            else
-            {
-                using (DataBase db = new DataBase())
+                else
                 {
-                    departmentHead.Name = tbName.Text;
-                    departmentHead.Surname = tbSurname.Text;
-                    departmentHead.Patronymic = tbPatronymic.Text;
-                    departmentHead.BirthDate = dtpBirthDate.Value;
-                    departmentHead.Gender = cmbGender.SelectedItem.ToString();
-                    departmentHead.Department = tbDepartment.Text;
-                    db.EditModel<DepartmentHead>(departmentHead);
-                }
+                    using (DataBase db = new DataBase())
+                    {
+                        departmentHead.Name = tbName.Text;
+                        departmentHead.Surname = tbSurname.Text;
+                        departmentHead.Patronymic = tbPatronymic.Text;
+                        departmentHead.BirthDate = dtpBirthDate.Value;
+                        departmentHead.Gender = cmbGender.SelectedItem.ToString();
+                        departmentHead.Department = tbDepartment.Text;
+                        db.EditModel<DepartmentHead>(departmentHead);
+                    }
 
-                DialogResult = DialogResult.OK;
-                Close();
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Произошла ошибка. Попробуйте заполнить все поля формы");
             }
         }
     }

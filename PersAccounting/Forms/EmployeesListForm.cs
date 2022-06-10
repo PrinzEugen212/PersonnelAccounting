@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PersAccounting.DB;
 using PersAccounting.Models;
+using PersAccounting.Models.Employees;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;

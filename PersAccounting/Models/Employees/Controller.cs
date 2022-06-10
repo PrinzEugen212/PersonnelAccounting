@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PersAccounting.Models
+namespace PersAccounting.Models.Employees
 {
     [Table("Controllers")]
     public class Controller : Person

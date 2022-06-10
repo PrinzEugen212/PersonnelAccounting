@@ -1,4 +1,4 @@
-﻿namespace PersAccounting
+﻿namespace PersAccounting.Enums
 {
     public enum ManageFormMode
     {

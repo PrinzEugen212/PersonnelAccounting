@@ -1,4 +1,7 @@
-﻿using PersAccounting.Models;
+﻿using PersAccounting.DB;
+using PersAccounting.Enums;
+using PersAccounting.Models;
+using PersAccounting.Models.Employees;
 using System;
 using System.Data;
 using System.Linq;

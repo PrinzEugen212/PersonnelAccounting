@@ -74,6 +74,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddForm";
+            this.Text = "Добавление сотрудника";
             this.ResumeLayout(false);
             this.PerformLayout();
 

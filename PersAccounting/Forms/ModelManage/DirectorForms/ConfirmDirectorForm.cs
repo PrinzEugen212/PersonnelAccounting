@@ -1,4 +1,6 @@
-﻿using PersAccounting.Models;
+﻿using PersAccounting.Enums;
+using PersAccounting.Models;
+using PersAccounting.Models.Employees;
 using System;
 using System.Windows.Forms;
 
@@ -24,7 +26,7 @@ namespace PersAccounting.Forms.ModelManage.DirectorForms
             lName.Text = departmentHead.Name;
             lSurname.Text = departmentHead.Surname;
             lPatronymic.Text = departmentHead.Patronymic;
-            lBirthDate.Text = departmentHead.BirthDate.ToString();
+            lBirthDate.Text = departmentHead.BirthDate.ToString("yyyy-MM-dd");
             lGender.Text = departmentHead.Gender;
             lPost.Text = departmentHead.Post;
 

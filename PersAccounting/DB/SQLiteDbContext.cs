@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersAccounting.Models;
+using PersAccounting.Models.Employees;
 using System;
 using System.IO;
 
-namespace PersAccounting
+namespace PersAccounting.DB
 {
     internal class SQLiteDbContext : DbContext
     {

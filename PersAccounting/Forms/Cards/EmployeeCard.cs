@@ -1,8 +1,11 @@
-﻿using PersAccounting.Forms.ModelManage.ControllerForms;
+﻿using PersAccounting.DB;
+using PersAccounting.Enums;
+using PersAccounting.Forms.ModelManage.ControllerForms;
 using PersAccounting.Forms.ModelManage.DepartmentHeadForms;
 using PersAccounting.Forms.ModelManage.DirectorForms;
 using PersAccounting.Forms.ModelManage.WorkerForms;
 using PersAccounting.Models;
+using PersAccounting.Models.Employees;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

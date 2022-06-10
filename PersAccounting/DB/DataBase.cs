@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersAccounting.Models;
+using PersAccounting.Models.Employees;
 using System;
 
-namespace PersAccounting
+namespace PersAccounting.DB
 {
     public class DataBase : IDisposable
     {

@@ -1,4 +1,7 @@
-﻿using PersAccounting.Models;
+﻿using PersAccounting.DB;
+using PersAccounting.Enums;
+using PersAccounting.Models;
+using PersAccounting.Models.Employees;
 using System;
 using System.Data;
 using System.Linq;
@@ -31,7 +34,7 @@ namespace PersAccounting.Forms.ModelManage.ControllerForms
             lName.Text = controller.Name;
             lSurname.Text = controller.Surname;
             lPatronymic.Text = controller.Patronymic;
-            lBirthDate.Text = controller.BirthDate.ToString();
+            lBirthDate.Text = controller.BirthDate.ToString("yyyy-MM-dd");
             lGender.Text = controller.Gender;
             if (controller.Head is not null)
             {

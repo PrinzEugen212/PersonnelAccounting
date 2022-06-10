@@ -55,9 +55,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(18, 355);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 20);
+            this.label6.Size = new System.Drawing.Size(119, 20);
             this.label6.TabIndex = 35;
-            this.label6.Text = "Должность";
+            this.label6.Text = "Специализация";
             // 
             // bConfirm
             // 
